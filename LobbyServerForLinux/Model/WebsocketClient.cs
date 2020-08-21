@@ -14,8 +14,6 @@ namespace LobbyServerForLinux.Models
 
         public string Id { get; set; }
 
-        public string RoomNo { get; set; }
-
         public Task SendMessageAsync(string message)
         {
             var msg = Encoding.UTF8.GetBytes(message);

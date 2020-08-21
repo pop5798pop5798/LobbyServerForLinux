@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace LobbyServerForLinux
 {
+    /// <summary> WebSocket連線主服務 </summary>
     public class WebsocketService
     {
         private readonly RequestDelegate _next;
@@ -21,7 +22,8 @@ namespace LobbyServerForLinux
             _next = next;
             _logger = loggerFactory.CreateLogger<WebsocketService>();               
         }
-
+        /// <summary> 調用webScoket </summary>
+        /// <param name="context"> 傳入資料 </param>
         public async Task Invoke(HttpContext context)
         {
             if (context.WebSockets.IsWebSocketRequest)
@@ -50,10 +52,11 @@ namespace LobbyServerForLinux
 
 
         }
-
+        /// <summary> 交握處理 </summary>
+        /// <param name="webSocket"> Scoket資料 </param>
         private async Task Handle(WebsocketClient webSocket)
         {
-            CollectionService.Add(webSocket);
+            WsCollectionService.Add(webSocket);
             _logger.LogInformation($"Websocket client added.");
 
             WebSocketReceiveResult result = null;
@@ -71,13 +74,14 @@ namespace LobbyServerForLinux
                 }
             }
             while (!result.CloseStatus.HasValue);
-            CollectionService.Remove(webSocket);
+            WsCollectionService.Remove(webSocket);
             _logger.LogInformation($"Websocket client closed.");
         }
-
+        /// <summary> 資料Rout </summary>
+        /// <param name="message"> 回傳資料訊息 </param>
         private void MessageRoute(Message message)
         {
-            var client = CollectionService.Get(message.Sn);
+            var client = WsCollectionService.Get(message.Sn);
             Message m = new Message();
             var jsonStr = "";
             switch (message.Cmd)

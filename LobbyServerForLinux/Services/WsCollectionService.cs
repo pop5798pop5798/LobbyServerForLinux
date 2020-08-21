@@ -6,20 +6,25 @@ using System.Threading.Tasks;
 
 namespace LobbyServerForLinux.Services
 {
-    public class CollectionService
+    /// <summary> WebSocket連線集合服務 </summary>
+    public class WsCollectionService
     {
         private static List<WebsocketClient> _clients = new List<WebsocketClient>();
 
+        /// <summary> 加入scoket </summary>
+        /// <param name="client"> 用戶sokcet </param>
         public static void Add(WebsocketClient client)
         {
             _clients.Add(client);
         }
-
+        /// <summary> 移除scoket </summary>
+        /// <param name="client"> 用戶sokcet </param>
         public static void Remove(WebsocketClient client)
         {
             _clients.Remove(client);
         }
-
+        /// <summary> 取得scoket用戶 </summary>
+        /// <param name="clientId"> 用戶sokcet ID </param>
         public static WebsocketClient Get(string clientId)
         {
             var client = _clients.FirstOrDefault(c => c.Id == clientId);
@@ -27,10 +32,5 @@ namespace LobbyServerForLinux.Services
             return client;
         }
 
-        public static List<WebsocketClient> GetRoomClients(string roomNo)
-        {
-            var client = _clients.Where(c => c.RoomNo == roomNo);
-            return client.ToList();
-        }
     }
 }
