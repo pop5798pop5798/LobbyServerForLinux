@@ -59,11 +59,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Game_Lobby\\New\\GameServer\\GameServer\\LobbyServerForLinux.csproj",
+      "projectUniqueName": "D:\\Game_Lobby\\New\\GameServer\\LobbyServerForLinux\\LobbyServerForLinux\\LobbyServerForLinux.csproj",
       "projectName": "LobbyServerForLinux",
-      "projectPath": "D:\\Game_Lobby\\New\\GameServer\\GameServer\\LobbyServerForLinux.csproj",
+      "projectPath": "D:\\Game_Lobby\\New\\GameServer\\LobbyServerForLinux\\LobbyServerForLinux\\LobbyServerForLinux.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Game_Lobby\\New\\GameServer\\GameServer\\obj\\",
+      "outputPath": "D:\\Game_Lobby\\New\\GameServer\\LobbyServerForLinux\\LobbyServerForLinux\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Microsoft\\Xamarin\\NuGet\\",

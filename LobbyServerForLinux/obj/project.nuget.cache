@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "V0bYsKPMWbGlP7GwlQvJwc4XZcLDlwk33If8TB0+Qxnrv4ncHPklm0BNsaQF2wHsLguOjByRJdR6ee4i7P3r2A==",
+  "success": true,
+  "projectFilePath": "D:\\Game_Lobby\\New\\GameServer\\LobbyServerForLinux\\LobbyServerForLinux\\LobbyServerForLinux.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
