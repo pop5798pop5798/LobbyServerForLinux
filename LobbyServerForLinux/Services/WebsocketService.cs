@@ -1,5 +1,7 @@
-﻿using LobbyServerForLinux.Models;
+﻿using LobbyServerForLinux.Model;
+using LobbyServerForLinux.Models;
 using LobbyServerForLinux.Services;
+using MhCore.DB;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -90,13 +92,39 @@ namespace LobbyServerForLinux
                 case "LoginServer":                   
                     m.Cmd = "LoginServer";
                     m.Data = "{}";
-                    jsonStr = JsonConvert.SerializeObject(m);
+                    CmdJSon_Login_Receive loginData = JsonConvert.DeserializeObject<CmdJSon_Login_Receive>(message.Data.ToString());
+                    DataNet_Login Logininfo = new DataNet_Login(1003, message.Sn, loginData.Key);
+                    DataServer_Login result = DBAdapter.Do.UserLogin(Logininfo);
+                    //bgEnd_UserLogin((DataServer_Login)info);
+                    CmdJSon_Login_Send Datainfo = new CmdJSon_Login_Send();
+                    Datainfo.NickName = result.data.nick_name;
+                    Datainfo.Plunid = result.data.user_id;
+                    Datainfo.State = 1;
+                    Datainfo.VPoints = result.data.user_point;
+                    message.Data = Datainfo;
+                    jsonStr = JsonConvert.SerializeObject(message);
                     client.SendMessageAsync(jsonStr);
                     break;
                 case "GetLobbyInfo":
                     m.Cmd = "GetLobbyInfo";
                     m.Data = "{}";
                     jsonStr = JsonConvert.SerializeObject(m);
+                    client.SendMessageAsync(jsonStr);
+                    break;
+                case "GetGameList":
+                    jsonStr = JsonConvert.SerializeObject(message);
+                    client.SendMessageAsync(jsonStr);
+                    break;
+                case "ClientGetPing":
+                    CmdJson_ClientGetPing_Send pinginfo = new CmdJson_ClientGetPing_Send();
+                    message.Data = pinginfo;
+                    jsonStr = JsonConvert.SerializeObject(message);
+                    client.SendMessageAsync(jsonStr);
+                    break;
+                case "SystemCheck":
+                    CmdJSon_SystemCheck_Send sysinfo = new CmdJSon_SystemCheck_Send();
+                    message.Data = sysinfo;
+                    jsonStr = JsonConvert.SerializeObject(message);
                     client.SendMessageAsync(jsonStr);
                     break;
                 default:
